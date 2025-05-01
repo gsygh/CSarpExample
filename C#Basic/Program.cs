@@ -146,6 +146,33 @@ do { Console.WriteLine($"카운트: {count}"); count++; } while (count < 3);  =>
 
 
 
+// 문자열
+/* 
+ C#에서의 문자열은 불변 -> string sen = sen + "1"; 하게 되면 문자열 수정이 아닌 새로운 문자열 생성
+ C#에서는 문자열 보간을 사용하여 문자열 내 변수 값 포함 가능 $기호 사용 -> string fullName = $"{firstName} {lastName}"; -> +를 사용한 재선언 보다 보간법이 더 가시성이 좋음 
+ 문자열 형식화
+ ...name, ...age
+ string foarmatted = string.Format("Name: {0}, Age: {1}", name, age);
+내부 함수
+ Substring(start index, number)
+ Contain("contain string") (return boolean) (대, 소문자 구분)
+ Equal("compare string", StringComparison.OrdinalIgnoreCase) (StringComparison.OrdinalIgnoreCase 는 대소문자 비교 무시)
+ sen.toUpper, sen.toLower
+ trim, trimStart, trimEnd(인자값이 있으면 인자값도 제거)
+ split(',') (특정 구분자로 나누어 "배열"로 반환)
+ join(',') ("배열 문자열"을 특정 구분자를 결합하여 하나의 문자열로 반환)
+ \n, \t, \"(큰 따옴표), \\(백슬래시)
+ 
+ 여러 문자열 조작이 필요할 경우, StringBuilder를 사용
+    StringBuilder sb = new StringBuilder();
+    sb.Append("...");
+    sb.Append("...");
+    sb.Append("...");
+    string resuolt = sb.ToString();
+ */
+
+
+
 // 상수
 //const int SUNDAY = 0;
 //const int MONDAY = 1;
