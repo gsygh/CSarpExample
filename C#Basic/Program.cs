@@ -1,5 +1,5 @@
 ﻿
-
+using class_example;
 
 
 //string message = "안녕하세요.";
@@ -207,6 +207,29 @@ public class Program
 
         int number = int.Parse(input ?? "0");
         Console.WriteLine("입력한 숫자는 " + number + " 입니다.");
+
+        ClassExample example = new ClassExample();
+
+        Console.WriteLine(example.GetBrand());
+
+
+        // static 예제
+        string name = "john";
+
+        name.Print();
+
+        // 상속 예제
+        Animal dog = new Dog();
+        Animal cat = new Cat();
+
+        dog.Eat();
+        dog.Eat();
+        dog.Eat();
+
+        cat.Move();
+        Console.WriteLine($"Dog Hp : {dog.HP}");
+
+
         // 콘솔 프로그램에서 키 입력을 기다릴 때 사용하는 메소드
         Console.ReadKey();
     }
