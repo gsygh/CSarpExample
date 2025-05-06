@@ -1,6 +1,8 @@
 ﻿
 using class_example;
 using interface_example;
+using System.Runtime.Remoting;
+using type_casting_example;
 
 //string message = "안녕하세요.";
 
@@ -233,6 +235,7 @@ public class Program
         */
 
         /* 인터페이스 예제 */
+        /*
         IInterfaceExample dog = new interface_example.Dog();
         Bird bird = new interface_example.Bird();
 
@@ -242,6 +245,52 @@ public class Program
 
         // 디폴트 구현 (C# 8.0 이상 예제)
         dog.PrintInformation();
+        */
+
+
+        /* Type Casting 예제 */
+        // 더 큰 타입에서 작은 타입으로 바꿀 때는 명시적 변환이 필수, 반대의 경우는 암시적 변환 가능
+        int intNum = 100;
+        double doubleNum = intNum; // 암시적 변환(int > double : 데이터 손실 X)
+        Console.WriteLine($"int: {intNum}, double: {doubleNum}");
+
+        double anotherDoubleNum = 123.456;
+        int anotherIntNum = (int)anotherDoubleNum; // 명시적 변환 ( double > int : 데이터 손실 O)
+        Console.WriteLine($"double: {anotherDoubleNum}, int: {anotherIntNum}");
+
+        // Object Type
+        // 대표적인 오류 예제
+        object stringObject = "C#";
+        //int number = (int)stringObject; // 오류 발견 X, 실행 시 알게 됨
+
+        // as 예제
+        object obj = "C#";
+        int? intValue = obj as int?;            // 오류 발생
+        string? stringValue = obj as string;
+
+        if (stringValue != null)
+        {
+            Console.WriteLine($"{stringValue}");
+        }
+
+        // Convert Class 예제(string > int)
+        string strNumber = "789";
+        int convertedInt = Convert.ToInt32(strNumber);
+        Console.WriteLine($"String: {strNumber}, Int: {convertedInt}");
+
+        // Convert Class 에제(byte > string)
+        byte[] bytes = { 1, 2, 3, 4, };
+        string base64String =Convert.ToBase64String(bytes);
+        Console.WriteLine(base64String);
+
+        // is 연산자 예제
+        object isObj = "C# Programming";
+
+        if (isObj is string isStr)
+        {
+            Console.WriteLine(isStr);
+        }
+
 
         // 콘솔 프로그램에서 키 입력을 기다릴 때 사용하는 메소드
         Console.ReadKey();
