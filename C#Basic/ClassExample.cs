@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 
 
-// 클래스
+/* 클래스 */
 /*
 접근 제어자
     public, private, protected(동일 클래스 및 파생 클래스에서 접근 가능), internal : 같은 어셈블리 내에서만 접근 가능), protected internal(같은 어셈블리 혹은 파생 클래스에서 접근 가능)

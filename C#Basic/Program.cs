@@ -1,6 +1,6 @@
 ﻿
 using class_example;
-
+using interface_example;
 
 //string message = "안녕하세요.";
 
@@ -199,6 +199,7 @@ public class Program
 {
     static void Main()
     {
+        /*
         Days days = Days.Monday;
         Console.WriteLine("main : " + days);
         Console.Write("숫자를 입력하세요 : ");
@@ -210,9 +211,10 @@ public class Program
 
         ClassExample example = new ClassExample();
 
-        Console.WriteLine(example.GetBrand());
+        Console.WriteLine(example.GetBrand()); */
 
-
+        /* Class 예제 */
+        /*
         // static 예제
         string name = "john";
 
@@ -228,7 +230,18 @@ public class Program
 
         cat.Move();
         Console.WriteLine($"Dog Hp : {dog.HP}");
+        */
 
+        /* 인터페이스 예제 */
+        IInterfaceExample dog = new interface_example.Dog();
+        Bird bird = new interface_example.Bird();
+
+        dog.MakeSound();
+        bird.Fly();
+        //bird.MakeSound(); 명시적 접근 예제로 인터페이스를 통한 선언을 해야 접근 가능
+
+        // 디폴트 구현 (C# 8.0 이상 예제)
+        dog.PrintInformation();
 
         // 콘솔 프로그램에서 키 입력을 기다릴 때 사용하는 메소드
         Console.ReadKey();
