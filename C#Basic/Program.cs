@@ -3,6 +3,8 @@ using class_example;
 using interface_example;
 using System.Runtime.Remoting;
 using type_casting_example;
+using struct_generic_example;
+
 
 //string message = "안녕하세요.";
 
@@ -249,6 +251,7 @@ public class Program
 
 
         /* Type Casting 예제 */
+        /*
         // 더 큰 타입에서 작은 타입으로 바꿀 때는 명시적 변환이 필수, 반대의 경우는 암시적 변환 가능
         int intNum = 100;
         double doubleNum = intNum; // 암시적 변환(int > double : 데이터 손실 X)
@@ -290,7 +293,82 @@ public class Program
         {
             Console.WriteLine(isStr);
         }
+        */
 
+        /* Struct & Generic 예제 */
+        // Struct 예제
+        Point point = new Point{ X = 10, Y = 20};
+
+        point.ChangePoint(100, 200);        // 매개변수로 구조체를 넘겨 변경할 경우는 값 타입이기 때문에 복사본만 함수 내에서 변경되고 기존 주소값인 원본에는 영향을 끼치지 않음
+
+        Console.WriteLine(point.ToString());
+
+        // Generic 예제
+        int genNum = 10;
+        int genNum2 = 20;
+
+        void Swap<T>(ref T a,  ref T b)
+        {
+            T temp = a;
+            a = b;
+            b = temp;
+        }
+
+        Swap<int>(ref genNum, ref genNum2);
+        Console.WriteLine($"a: {genNum}, b: {genNum2}");
+
+        // Generic 제약 조건 Class 예제
+        struct_generic_example.Animal genDog = new struct_generic_example.Dog();
+        struct_generic_example.Animal genCat = new struct_generic_example.Cat();
+
+        void SwapForClass<T>(ref T a, ref T b)
+            where T : class
+        {
+            T temp = a;
+            a = b;
+            b = temp;
+        }
+
+        SwapForClass(ref genDog, ref genCat);
+        Console.WriteLine($"genDog : {genDog}, genCat: {genCat}");
+
+        // Generic 제약 조건 new() 예제
+        void CreateInstance<T, T2>(out T a, out T2 b)
+            where T: class, new()
+            where T2: class, new()
+        {
+            a = new T();
+            b = new T2();
+        }
+        CreateInstance(out struct_generic_example.Dog newDog, out struct_generic_example.Cat newCat);
+
+        Console.WriteLine($"newDog : {newDog}, newCat: {newCat}");
+        
+        // Generic 제약 조건 new() 를 이용한 객체 생성 예제
+        T CreateInstance2<T> ()
+            where T : class, new()
+        {
+            return new T();
+        }
+        var newAnimal = CreateInstance2<struct_generic_example.Cat>();
+        Console.WriteLine($"{newAnimal}");
+
+        // Generic 제약 조건 "Class 명" 을 이용한 객체 생성 예제
+        T CreateInstance3<T>()
+            where T : struct_generic_example.Animal, new()
+        {
+            T instance = new T();
+            instance.MakeSount();
+            return instance;
+        }
+        var ClassNameAnimal = CreateInstance3<struct_generic_example.Cat>();
+        Console.WriteLine($"{ClassNameAnimal}");
+
+        // class 내부 Generic 사용 예제
+        GenericBox<int> genericBox = new GenericBox<int>();
+        genericBox.Add(3);
+        var item = genericBox.GetItem();
+        Console.WriteLine($"genericBox: {item}");
 
         // 콘솔 프로그램에서 키 입력을 기다릴 때 사용하는 메소드
         Console.ReadKey();

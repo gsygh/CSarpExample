@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 /* 인터페이스 */
 /*
-java 에서 사용하던 interface(추상 클래스) 개념 그대로.
+java 에서 사용하던 interface 개념 그대로.
+    인터페이스에 정의된 메서드를 각 클래스의 목적에 맞게 기능을 구현 (추상 클래스 abstract 는 자신의 기능을 하위 클래스로 확장시키는 느낌)
     method, property, event 등을 정의할 수 있으며, field나 세부 구현은 불가.
     interface naming 시 대문자 I 추가 (암묵적인 룰)
 
