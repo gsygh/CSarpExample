@@ -4,7 +4,11 @@ using interface_example;
 using System.Runtime.Remoting;
 using type_casting_example;
 using struct_generic_example;
+using delegate_example;
+using collection_example;
 
+
+delegate int Dele_Operation(int a, int b);     // delegate 선언
 
 //string message = "안녕하세요.";
 
@@ -199,7 +203,7 @@ enum Days       // '상수'들의 집합 (함수 내 정의 불가)
 
 
 
-public class Program
+public partial class Program
 {
     static void Main()
     {
@@ -297,6 +301,7 @@ public class Program
 
         /* Struct & Generic 예제 */
         // Struct 예제
+        /*
         Point point = new Point{ X = 10, Y = 20};
 
         point.ChangePoint(100, 200);        // 매개변수로 구조체를 넘겨 변경할 경우는 값 타입이기 때문에 복사본만 함수 내에서 변경되고 기존 주소값인 원본에는 영향을 끼치지 않음
@@ -369,9 +374,56 @@ public class Program
         genericBox.Add(3);
         var item = genericBox.GetItem();
         Console.WriteLine($"genericBox: {item}");
+        */
+
+        /* Delegate 에제 */
+        /* 
+        int Plus(int a, int b)
+        {
+            return a + b;
+        }
+
+        int Minus(int a, int b)
+        {
+            return a - b;
+        }
+
+        Dele_Operation? dele_operation = Plus;
+        dele_operation += Minus;
+        dele_operation -= Minus;
+
+        int result = dele_operation(10, 5);
+        Console.WriteLine(result);
+
+        // delegate 를 이용한 Calculate 예제
+        DelegateExample calculate = new DelegateExample();
+        calculate.OnValueChanged += Calculate_OnValueChanged;
+
+        calculate.Plus(5);
+        calculate.OnValueChanged -= Calculate_OnValueChanged;       // onvalueChanged 에서 이벤트 Delegate를 제외하여 Minus는 동작하지 않음
+        calculate.Minus(3);
+
+        // 매개변수에 Delegate를 사용하는 예제(함수를 매개변수로 활용)
+        void ApplyOperation(int a, int b, Func<int, int, int> operation)
+        {
+            int result = operation(a, b);
+            Console.WriteLine(result);
+        }
+
+        ApplyOperation(5, 10, Plus);
+        ApplyOperation(10, 5, Minus);
+        */
+
+        /* 열거자(Enumerator) */
 
         // 콘솔 프로그램에서 키 입력을 기다릴 때 사용하는 메소드
         Console.ReadKey();
     }
-}
 
+    
+    // delegate 를 이용한 Calculate 예제에 필요한 함수
+    private static void Calculate_OnValueChanged(int result, string msg)
+    {
+        Console.WriteLine($"{msg} - 현재 값 : {result}");
+    }
+}
